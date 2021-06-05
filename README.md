@@ -5,21 +5,16 @@ vine client api
 vine is a file storage service, git url:https://github.com/andyzhou/vine
 
 # example
-
- //import 
- 
+```
  import "github.com/andyzhou/vine_client"
 
- //init client 
- 
+ //init client
  client := vine.NewClient()
  
  //add master node
- 
  client.AddNodes("localhost:777")
  
  //for write
- 
  shortUrl, err := client.WriteFile(
  					owner int64,
  					fileName,
@@ -28,7 +23,6 @@ vine is a file storage service, git url:https://github.com/andyzhou/vine
  				)
  				
  //for read
- 
 data, err := client.ReadFile(
                   shortUrl string,
                   offset,
@@ -36,5 +30,5 @@ data, err := client.ReadFile(
                  )
 
 //quit
-
 client.Quit()
+```
