@@ -27,7 +27,6 @@ type (
 		File define.FileName
 		Type define.FileType
 		Data []byte
-		Owner define.Owner
 	}
 	WriteFileReply struct {
 		ShortUrl define.ShortUrl

@@ -68,20 +68,17 @@ func (c *Client) ReadFile(
 
 //write file
 func (c *Client) WriteFile(
-					owner int64,
 					fileName,
 					fileType string,
 					data []byte,
 				) (string, error) {
 	//check
-	if owner <= 0 || fileName == "" ||
-		fileType == "" || data == nil {
+	if fileName == "" || fileType == "" || data == nil {
 		return "", errors.New("invalid parameter")
 	}
 
 	//send rpc call on master node
 	args := comm.WriteFileArg{
-		Owner: define.Owner(owner),
 		File:define.FileName(fileName),
 		Type:define.FileType(fileType),
 		Data:data,
