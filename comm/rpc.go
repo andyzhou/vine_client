@@ -45,6 +45,15 @@ type (
 		ErrorCode define.ErrorCode
 	}
 
+	//for delete file
+	DelFileArg struct {
+		ShortUrl define.ShortUrl
+		Token string
+	}
+	DelFileReply struct {
+		ErrorCode define.ErrorCode
+	}
+
 	//////////////////
 	//for chunk server
 	//////////////////

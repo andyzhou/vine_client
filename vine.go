@@ -37,6 +37,30 @@ func (c *Client) Quit() {
 	c.rpcClient.Quit()
 }
 
+//delete file
+func (c *Client) DelFile(
+					shortUrl,
+					token string,
+				) error {
+	//check
+	if shortUrl == "" || token == "" {
+		return errors.New("invalid parameter")
+	}
+
+	//send rpc call on master node
+	args := comm.DelFileArg{
+		ShortUrl: define.ShortUrl(shortUrl),
+		Token: token,
+	}
+	reply := comm.DelFileReply{}
+	err := c.rpcClient.Call(
+		fmt.Sprintf(define.MaterRpcNamePara, "RPCDelFile"),
+		args,
+		&reply,
+	)
+	return err
+}
+
 //read file
 func (c *Client) ReadFile(
 					shortUrl string,
