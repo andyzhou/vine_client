@@ -9,6 +9,15 @@ type (
 		Err  string
 	}
 
+	//for file info
+	OneFileInfo struct {
+		ShortUrl define.ShortUrl
+		Name define.FileName
+		Type define.FileType
+		Length define.Length
+		CreateAt int64
+	}
+
 	//////////////////
 	//for master server
 	//////////////////
@@ -52,6 +61,16 @@ type (
 	}
 	DelFileReply struct {
 		ErrorCode define.ErrorCode
+	}
+
+	//for list file
+	ListFileArg struct {
+		Page int
+		PageSize int
+	}
+	ListFileReply struct {
+		RecSize int
+		Files []*OneFileInfo
 	}
 
 	//////////////////

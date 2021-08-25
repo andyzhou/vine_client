@@ -37,6 +37,25 @@ func (c *Client) Quit() {
 	c.rpcClient.Quit()
 }
 
+//list file
+func (c *Client) ListFile(
+					page,
+					pageSize int,
+				) (*comm.ListFileReply, error) {
+	//send rpc call on master node
+	args := comm.ListFileArg{
+		Page: page,
+		PageSize: pageSize,
+	}
+	reply := &comm.ListFileReply{}
+	err := c.rpcClient.Call(
+		fmt.Sprintf(define.MaterRpcNamePara, "PRCListFile"),
+		args,
+		reply,
+	)
+	return reply, err
+}
+
 //delete file
 func (c *Client) DelFile(
 					shortUrl,
