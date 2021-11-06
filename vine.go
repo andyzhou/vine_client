@@ -114,10 +114,17 @@ func (c *Client) WriteFile(
 					fileName,
 					fileType string,
 					data []byte,
+					shortUrls ... string,
 				) (string, error) {
 	//check
 	if fileName == "" || fileType == "" || data == nil {
 		return "", errors.New("invalid parameter")
+	}
+
+	//check assigned short url
+	assignedShortUrl := ""
+	if shortUrls != nil && len(shortUrls) > 0 {
+		assignedShortUrl = shortUrls[0]
 	}
 
 	//send rpc call on master node
@@ -125,6 +132,7 @@ func (c *Client) WriteFile(
 		File:define.FileName(fileName),
 		Type:define.FileType(fileType),
 		Data:data,
+		ShortUrl: define.ShortUrl(assignedShortUrl),
 	}
 	reply := comm.WriteFileReply{}
 	err := c.rpcClient.Call(

@@ -36,6 +36,7 @@ type (
 		File define.FileName
 		Type define.FileType
 		Data []byte
+		ShortUrl define.ShortUrl //assigned short url
 	}
 	WriteFileReply struct {
 		ShortUrl define.ShortUrl
