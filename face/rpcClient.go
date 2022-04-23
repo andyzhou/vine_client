@@ -147,16 +147,14 @@ func (f *RpcClient) Call(
 }
 
 //add rpc server nodes
-func (f *RpcClient) AddNodes(addresses ...define.ServerAddress) bool {
+func (f *RpcClient) AddNodes(addresses ...define.ServerAddress) error {
+	var (
+		err error
+	)
 	//check
 	if addresses == nil || len(addresses) <= 0 {
-		return false
+		return errors.New("invalid nodes")
 	}
-	defer func() {
-		if err := recover(); err != nil {
-			log.Println("RpcClient:AddNode panic, err:", err)
-		}
-	}()
 
 	//loop check
 	for _, address := range addresses {
@@ -166,10 +164,13 @@ func (f *RpcClient) AddNodes(addresses ...define.ServerAddress) bool {
 			continue
 		}
 		//add new server
-		f.newServerChan <- address
+		err = f.initNewServer(address)
+		if err != nil {
+			break
+		}
 	}
 
-	return true
+	return err
 }
 
 ///////////////
@@ -260,12 +261,12 @@ func (f *RpcClient) getClientByAddr(addr define.ServerAddress) *rpcClient {
 }
 
 //dial server
-func (f *RpcClient) dialServer(address define.ServerAddress) *rpcClient {
+func (f *RpcClient) dialServer(address define.ServerAddress) (*rpcClient, error) {
 	//try dial server
 	client, err := rpc.Dial("tcp", string(address))
 	if err != nil {
 		log.Printf("rpc dial %v failed, err:%v\n", address, err.Error())
-		return nil
+		return nil, err
 	}
 	//sync into cache with locker
 	rpcClient := &rpcClient{
@@ -276,20 +277,17 @@ func (f *RpcClient) dialServer(address define.ServerAddress) *rpcClient {
 	f.Lock()
 	defer f.Unlock()
 	f.servers[address] = rpcClient
-	return rpcClient
+	return rpcClient, nil
 }
 
 //new server init
-func (f *RpcClient) initNewServer(node define.ServerAddress) bool {
+func (f *RpcClient) initNewServer(node define.ServerAddress) error {
 	//check
 	if node == "" {
-		return false
+		return errors.New("invalid server node")
 	}
 
 	//dial
-	rpcClient := f.dialServer(node)
-	if rpcClient == nil {
-		return false
-	}
-	return true
+	_, err := f.dialServer(node)
+	return err
 }

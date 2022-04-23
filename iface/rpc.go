@@ -13,5 +13,5 @@ type IRpcClient interface {
 	NodeDown(node define.ServerAddress) bool
 	CallAll(rpcName string, args interface{}) error
 	Call(rpcName string, args, reply interface{}) error
-	AddNodes(addresses ...define.ServerAddress) bool
+	AddNodes(addresses ...define.ServerAddress) error
 }
