@@ -214,8 +214,6 @@ func (f *RpcClient) tickHandle() {
 	}
 }
 
-//call on
-
 //re-conn un-active client
 func (f *RpcClient) reConnClient() bool {
 	//check
