@@ -185,16 +185,16 @@ func (c *Client) WriteFile(
 }
 
 //add master node
-func (c *Client) AddNodes(nodes ...string) bool {
+func (c *Client) AddNodes(nodes ...string) error {
 	//check
 	if nodes == nil || len(nodes) <= 0 {
-		return false
+		return errors.New("invalid parameter")
 	}
 	//add nodes
 	serverNodes := make([]define.ServerAddress, 0)
 	for _, node := range nodes {
 		serverNodes = append(serverNodes, define.ServerAddress(node))
 	}
-	c.rpcClient.AddNodes(serverNodes...)
-	return true
+	err := c.rpcClient.AddNodes(serverNodes...)
+	return err
 }

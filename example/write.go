@@ -22,7 +22,11 @@ func main() {
 	client := vine.NewClient()
 
 	//add master node
-	client.AddNodes(define.VineMasterNode)
+	err := client.AddNodes(define.VineMasterNode)
+	if err != nil {
+		log.Printf("connect nodes failed, err:%v", err.Error())
+		return
+	}
 
 	//read file data
 	base := define.NewBase()
