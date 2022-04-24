@@ -2,12 +2,7 @@ package main
 
 import (
 	vine "github.com/andyzhou/vine_client"
-	"github.com/andyzhou/vine_client/example/define"
 	"log"
-)
-
-const (
-	FileShortUrl = "Z90wVp"
 )
 
 func main() {
@@ -22,7 +17,7 @@ func main() {
 	}
 
 	//read file data by short url
-	fileData, err := client.ReadFile(FileShortUrl)
+	fileData, err := client.ReadFile(define.FileShortUrl)
 	if err != nil {
 		log.Printf("read file failed, err:%v", err.Error())
 		return

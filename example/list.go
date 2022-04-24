@@ -2,7 +2,6 @@ package main
 
 import (
 	vine "github.com/andyzhou/vine_client"
-	"github.com/andyzhou/vine_client/example/define"
 	"log"
 )
 

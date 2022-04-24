@@ -6,10 +6,6 @@ import (
 	"log"
 )
 
-const (
-	FileShortUrl = "Z90wVp"
-)
-
 func main() {
 	//init client
 	client := vine.NewClient()
@@ -22,7 +18,7 @@ func main() {
 	}
 
 	//read file data by short url
-	err = client.DelFile(FileShortUrl, "")
+	err = client.DelFile(define.FileShortUrl, "")
 	if err != nil {
 		log.Printf("delete file failed, err:%v", err.Error())
 		return
