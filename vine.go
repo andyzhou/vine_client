@@ -7,6 +7,7 @@ import (
 	"github.com/andyzhou/vine_client/define"
 	"github.com/andyzhou/vine_client/face"
 	"github.com/andyzhou/vine_client/iface"
+	"net/http"
 	"sync"
 )
 
@@ -149,13 +150,12 @@ func (c *Client) ReadFile(
 //write file
 //return shortUrl, error
 func (c *Client) WriteFile(
-					fileName,
-					fileType string,
+					fileName string,
 					data []byte,
 					shortUrls ... string,
 				) (string, error) {
 	//check
-	if fileName == "" || fileType == "" || data == nil {
+	if fileName == "" || data == nil {
 		return "", errors.New("invalid parameter")
 	}
 
@@ -164,6 +164,9 @@ func (c *Client) WriteFile(
 	if shortUrls != nil && len(shortUrls) > 0 {
 		assignedShortUrl = shortUrls[0]
 	}
+
+	//get file type
+	fileType := http.DetectContentType(data)
 
 	//send rpc call on master node
 	args := comm.WriteFileArg{

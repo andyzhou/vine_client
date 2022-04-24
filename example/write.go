@@ -37,7 +37,7 @@ func main() {
 	}
 
 	//send file data to vine master
-	fileShortUrl, err := client.WriteFile(TxtFileName, TxtFileType, fileData)
+	fileShortUrl, err := client.WriteFile(TxtFileName, fileData)
 	if err != nil {
 		log.Printf("write file failed, err:%v", err.Error())
 		return
