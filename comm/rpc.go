@@ -40,6 +40,7 @@ type (
 	}
 	WriteFileReply struct {
 		ShortUrl define.ShortUrl
+		Token string //used for delete file
 		ErrorCode define.ErrorCode
 	}
 

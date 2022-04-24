@@ -148,15 +148,15 @@ func (c *Client) ReadFile(
 }
 
 //write file
-//return shortUrl, error
+//return shortUrl, token, error
 func (c *Client) WriteFile(
 					fileName string,
 					data []byte,
 					shortUrls ... string,
-				) (string, error) {
+				) (string, string, error) {
 	//check
 	if fileName == "" || data == nil {
-		return "", errors.New("invalid parameter")
+		return "", "", errors.New("invalid parameter")
 	}
 
 	//check assigned short url
@@ -182,9 +182,9 @@ func (c *Client) WriteFile(
 		&reply,
 	)
 	if err != nil {
-		return "", err
+		return "", "", err
 	}
-	return string(reply.ShortUrl), nil
+	return string(reply.ShortUrl), reply.Token, nil
 }
 
 //add master node
