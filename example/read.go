@@ -10,14 +10,14 @@ func main() {
 	client := vine.NewClient()
 
 	//add master node
-	err := client.AddNodes(define.VineMasterNode)
+	err := client.AddNodes(VineMasterNode)
 	if err != nil {
 		log.Printf("connect nodes failed, err:%v", err.Error())
 		return
 	}
 
 	//read file data by short url
-	fileData, err := client.ReadFile(define.FileShortUrl)
+	fileData, err := client.ReadFile(FileShortUrl)
 	if err != nil {
 		log.Printf("read file failed, err:%v", err.Error())
 		return

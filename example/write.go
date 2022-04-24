@@ -21,7 +21,7 @@ func main() {
 	client := vine.NewClient()
 
 	//add master node
-	err := client.AddNodes(define.VineMasterNode)
+	err := client.AddNodes(VineMasterNode)
 	if err != nil {
 		log.Printf("connect nodes failed, err:%v", err.Error())
 		return
