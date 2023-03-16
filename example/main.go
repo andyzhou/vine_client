@@ -35,7 +35,10 @@ func main() {
 	//WriteFile(client)
 
 	//read file
-	ReadFile(client)
+	//ReadFile(client)
+
+	//list file
+	ListFile(client)
 }
 
 //delete file

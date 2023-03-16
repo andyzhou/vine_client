@@ -69,6 +69,7 @@ type (
 	ListFileArg struct {
 		Page int
 		PageSize int
+		Owner int64
 	}
 	ListFileReply struct {
 		RecSize int

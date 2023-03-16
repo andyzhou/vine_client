@@ -57,6 +57,7 @@ func (c *Client) Quit() {
 func (c *Client) ListFile(
 					page,
 					pageSize int,
+					owners ...int64,
 				) (*comm.ListFileReply, error) {
 	//check
 	if page <= 0 {
@@ -66,9 +67,14 @@ func (c *Client) ListFile(
 		page = define.PageSizeDefault
 	}
 	//send rpc call on master node
+	owner := int64(0)
+	if owners != nil && len(owners) > 0 {
+		owner = owners[0]
+	}
 	args := comm.ListFileArg{
 		Page: page,
 		PageSize: pageSize,
+		Owner: owner,
 	}
 	reply := &comm.ListFileReply{}
 	err := c.rpcClient.Call(
