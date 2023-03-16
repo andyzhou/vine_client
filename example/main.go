@@ -11,7 +11,7 @@ import (
 //server define
 const (
 	VineMasterNode = "127.0.0.1:7777"
-	FileShortUrl = "Z90wVp"
+	FileShortUrl = "4ARF58"
 )
 
 const (
@@ -80,8 +80,8 @@ func ReadFile(client *vine.Client)  {
 		log.Printf("read file failed, err:%v", err.Error())
 		return
 	}
-
-	log.Printf("read file succeed, data:%v", string(fileData))
+	fileInfo := string(fileData)
+	log.Printf("read file succeed, data:%v\n", fileInfo)
 }
 
 //write file
