@@ -53,6 +53,31 @@ func (c *Client) Quit() {
 	c.rpcClient.Quit()
 }
 
+//list chunk nodes
+func (c *Client) ListChunkNodes(
+			page,
+			pageSize int,
+		) (*comm.ChunkNodesReply, error) {
+	//check
+	if page <= 0 {
+		page = define.PageDefault
+	}
+	if pageSize <= 0 {
+		page = define.PageSizeDefault
+	}
+	args := comm.ChunkNodesArg{
+		Page: define.Page(page),
+		PageSize: define.PageSize(pageSize),
+	}
+	reply := &comm.ChunkNodesReply{}
+	err := c.rpcClient.Call(
+		fmt.Sprintf(define.MaterRpcNamePara, "RPCChunkNodes"),
+		args,
+		reply,
+	)
+	return reply, err
+}
+
 //list file
 func (c *Client) ListFile(
 					page,

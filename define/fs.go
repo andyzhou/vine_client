@@ -22,6 +22,10 @@ type (
 	Checksum int64
 	MutationType int
 	ErrorCode int
+	ErrMessage string
+	Page int
+	PageSize int
+	Num int
 )
 
 const (

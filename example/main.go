@@ -38,7 +38,28 @@ func main() {
 	//ReadFile(client)
 
 	//list file
-	ListFile(client)
+	//ListFile(client)
+
+	//list nodes
+	ListChunkNodes(client)
+}
+
+//chunk node list
+func ListChunkNodes(client *vine.Client)  {
+	page := 1
+	pageSize := 10
+	nodeList, err := client.ListChunkNodes(page, pageSize)
+	if err != nil {
+		log.Printf("list nodes failed, err:%v", err.Error())
+		return
+	}
+	if nodeList == nil {
+		log.Printf("list node, no records")
+		return
+	}
+	for _, v := range nodeList.Recs {
+		log.Printf("v:%v\n", v)
+	}
 }
 
 //delete file

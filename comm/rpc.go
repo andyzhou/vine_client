@@ -18,9 +18,26 @@ type (
 		CreateAt int64
 	}
 
+	//chunk node info
+	ChunkNodeInfo struct {
+		Node string
+		Address string
+		ActiveTime int64
+	}
+
 	//////////////////
 	//for master server
 	//////////////////
+
+	//for chunk nodes list
+	ChunkNodesArg struct {
+		Page define.Page
+		PageSize define.PageSize
+	}
+	ChunkNodesReply struct {
+		Recs []*ChunkNodeInfo
+		ErrorCode define.ErrorCode
+	}
 
 	//for heart beat
 	HeartbeatArg struct {
